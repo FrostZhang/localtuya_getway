@@ -330,7 +330,10 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
     @property
     def available(self):
         """Return if device is available or not."""
-        return str(self._dp_id) in self._status
+        if self._cid != None:
+            return str(self._cid) in self._status
+        else:
+            return str(self._dp_id) in self._status
 
     def dps(self, dp_index, cid = None):
         """Return cached value for DPS index."""
