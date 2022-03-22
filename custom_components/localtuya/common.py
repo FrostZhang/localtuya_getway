@@ -331,7 +331,9 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
     def available(self):
         """Return if device is available or not."""
         if self._cid != None:
-            return str(self._cid) in self._status
+            #return str(self._cid) in self._status
+            #Todo 网关下面的单位暂不知道怎么判定存在
+            return True
         else:
             return str(self._dp_id) in self._status
 
@@ -340,14 +342,14 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
         value = None
         if cid == None:
             value = self._status.get(str(dp_index))
+            if value is None:
+                self.warning(
+                    "Entity %s is requesting unknown DPS index %s",
+                    self.entity_id,
+                    dp_index,
+                )
         elif cid in self._status:
             value = self._status.get(cid).get(str(dp_index))
-        if value is None:
-            self.warning(
-                "Entity %s is requesting unknown DPS index %s",
-                self.entity_id,
-                dp_index,
-            )
 
         return value
 
