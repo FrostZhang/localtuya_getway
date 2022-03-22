@@ -440,7 +440,7 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
             transport.close()
 
     async def exchange(self, command, cid=None, dps=None):
-        """Send and receive a message, returning response from device."""
+        """发送和接收消息，从设备返回响应 Send and receive a message, returning response from device."""
         self.debug(
             "Sending command %s (device type: %s)",
             command,
@@ -477,7 +477,7 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
         return payload
 
     async def status(self):
-        """Return device status."""
+        """返回设备状态 Return device status."""
         status = await self.exchange(STATUS)
         if status and "dps" in status:
             self.dps_cache.update(status["dps"])
