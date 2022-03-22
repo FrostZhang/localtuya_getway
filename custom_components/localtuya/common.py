@@ -335,9 +335,9 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
     def dps(self, dp_index, cid = None):
         """Return cached value for DPS index."""
         value = None
-        if cid == None
+        if cid == None:
             value = self._status.get(str(dp_index))
-        else
+        elif cid in self._status:
             value = self._status.get(cid).get(str(dp_index))
         if value is None:
             self.warning(
