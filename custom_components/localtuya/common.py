@@ -76,6 +76,7 @@ async def async_setup_entry(
                 tuyainterface,
                 config_entry,
                 device_config[CONF_ID],
+                device_config[CONF_CID_STRING],
             )
         )
 
@@ -89,7 +90,7 @@ def get_dps_for_platform(flow_schema):
             yield key.schema
 
 
-def get_entity_config(config_entry, dp_id,cid):
+def get_entity_config(config_entry, dp_id, cid):
     """Return entity config for a given DPS id."""
     for entity in config_entry.data[CONF_ENTITIES]:
         if entity[CONF_ID] == dp_id and entity[CONF_CID_STRING] == cid:

@@ -487,7 +487,7 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
         """Send a heartbeat message."""
         return await self.exchange(HEARTBEAT)
 
-    async def update_dps(self, cid, dps=None):
+    async def update_dps(self, dps=None):
         """
         Request device to update index.
 
@@ -503,7 +503,7 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
                     # filter non whitelisted dps
                     dps = list(set(dps).intersection(set(UPDATE_DPS_WHITELIST)))
             self.debug("updatedps() entry (dps %s, dps_cache %s)", dps, self.dps_cache)
-            payload = self._generate_payload(UPDATEDPS, cid, dps)
+            payload = self._generate_payload(UPDATEDPS, None, dps)
             self.transport.write(payload)
         return True
 
