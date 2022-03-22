@@ -87,16 +87,16 @@ def flow_schema(dps):
         vol.Optional(CONF_FAULT_DP): vol.In(dps),
         vol.Optional(CONF_PAUSED_STATE, default=DEFAULT_PAUSED_STATE): str,
         vol.Optional(CONF_STOP_STATUS, default=DEFAULT_STOP_STATUS): str,
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Optional(CONF_CID_STRING): str,
     }
 
 
 class LocaltuyaVacuum(LocalTuyaEntity, StateVacuumEntity):
     """Tuya vacuum device."""
 
-    def __init__(self, device, config_entry, switchid,cid, **kwargs):
+    def __init__(self, device, config_entry, switchid, cid, **kwargs):
         """Initialize a new LocaltuyaVacuum."""
-        super().__init__(device, config_entry, switchid,cid, _LOGGER, **kwargs)
+        super().__init__(device, config_entry, switchid, cid, _LOGGER, **kwargs)
         self._state = None
         self._battery_level = None
         self._attrs = {}

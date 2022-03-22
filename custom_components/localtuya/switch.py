@@ -25,7 +25,7 @@ def flow_schema(dps):
         vol.Optional(CONF_CURRENT): vol.In(dps),
         vol.Optional(CONF_CURRENT_CONSUMPTION): vol.In(dps),
         vol.Optional(CONF_VOLTAGE): vol.In(dps),
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Optional(CONF_CID_STRING): str,
     }
 
 
@@ -41,7 +41,7 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
         **kwargs,
     ):
         """Initialize the Tuya switch."""
-        super().__init__(device, config_entry, switchid,cid, _LOGGER, **kwargs)
+        super().__init__(device, config_entry, switchid, cid, _LOGGER, **kwargs)
         self._state = None
         print("Initialized switch [{}]".format(self.name))
 

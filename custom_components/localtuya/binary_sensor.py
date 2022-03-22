@@ -28,7 +28,7 @@ def flow_schema(dps):
         vol.Required(CONF_STATE_ON, default="True"): str,
         vol.Required(CONF_STATE_OFF, default="False"): str,
         vol.Optional(CONF_DEVICE_CLASS): DEVICE_CLASSES_SCHEMA,
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Optional(CONF_CID_STRING): str,
     }
 
 

@@ -130,7 +130,7 @@ def flow_schema(dps):
         vol.Optional(
             CONF_MUSIC_MODE, default=False, description={"suggested_value": False}
         ): bool,
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Optional(CONF_CID_STRING): str,
     }
 
 

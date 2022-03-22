@@ -137,7 +137,7 @@ def flow_schema(dps):
             [PRECISION_WHOLE, PRECISION_HALVES, PRECISION_TENTHS]
         ),
         vol.Optional(CONF_HEURISTIC_ACTION): bool,
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Optional(CONF_CID_STRING): str,
     }
 
 

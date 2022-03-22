@@ -57,16 +57,16 @@ def flow_schema(dps):
         vol.Optional(CONF_SPAN_TIME, default=DEFAULT_SPAN_TIME): vol.All(
             vol.Coerce(float), vol.Range(min=1.0, max=300.0)
         ),
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Optional(CONF_CID_STRING): str,
     }
 
 
 class LocaltuyaCover(LocalTuyaEntity, CoverEntity):
     """Tuya cover device."""
 
-    def __init__(self, device, config_entry, switchid,cid, **kwargs):
+    def __init__(self, device, config_entry, switchid, cid, **kwargs):
         """Initialize a new LocaltuyaCover."""
-        super().__init__(device, config_entry, switchid,cid, _LOGGER, **kwargs)
+        super().__init__(device, config_entry, switchid, cid, _LOGGER, **kwargs)
         commands_set = DEFAULT_COMMANDS_SET
         if self.has_config(CONF_COMMANDS_SET):
             commands_set = self._config[CONF_COMMANDS_SET]
