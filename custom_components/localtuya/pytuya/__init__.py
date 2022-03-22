@@ -483,7 +483,11 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
     async def status(self):
         """返回设备状态 Return device status."""
         status = await self.exchange(STATUS)
-        if status and "dps" in status:
+        if status and "cid" in status:
+            statu = {}
+            statu[decoded_message["cid"]] = status["dps"]
+            self.dps_cache.update(statu)
+        elif status and "dps" in status:
             self.dps_cache.update(status["dps"])
         return self.dps_cache
 
@@ -503,7 +507,13 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
                 if not self.dps_cache:
                     await self.detect_available_dps()
                 if self.dps_cache:
-                    dps = [int(dp) for dp in self.dps_cache]
+                    dps=[]
+                    for dpcid in self.dps_cache:
+                        if "dps" in dpcid:
+                            dps.append(dpcid["dps"])
+                        else:
+                            dps.append(dpcid)
+                    #dps = [int(dp) for dp in self.dps_cache]
                     # filter non whitelisted dps
                     dps = list(set(dps).intersection(set(UPDATE_DPS_WHITELIST)))
             self.debug("updatedps() entry (dps %s, dps_cache %s)", dps, self.dps_cache)
@@ -544,7 +554,11 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
             except Exception as ex:
                 self.exception("Failed to get status: %s", ex)
                 raise
-            if "dps" in data:
+            if "cid" in decoded_message:
+                statu = {}
+                statu[decoded_message["cid"]] = decoded_message["dps"]
+                self.dps_cache.update(statu)
+            elif "dps" in data:
                 self.dps_cache.update(data["dps"])
 
             if self.dev_type == "type_0a":

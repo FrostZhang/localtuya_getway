@@ -54,23 +54,23 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
     def extra_state_attributes(self):
         """Return device state attributes."""
         attrs = {}
-        if self.has_config(CONF_CURRENT):
-            attrs[ATTR_CURRENT] = self.dps(self._config[CONF_CURRENT])
-        if self.has_config(CONF_CURRENT_CONSUMPTION):
-            attrs[ATTR_CURRENT_CONSUMPTION] = (
-                self.dps(self._config[CONF_CURRENT_CONSUMPTION]) / 10
-            )
-        if self.has_config(CONF_VOLTAGE):
-            attrs[ATTR_VOLTAGE] = self.dps(self._config[CONF_VOLTAGE]) / 10
+        #if self.has_config(CONF_CURRENT):
+        #    attrs[ATTR_CURRENT] = self.dps(self._config[CONF_CURRENT], self._cid)
+        #if self.has_config(CONF_CURRENT_CONSUMPTION):
+        #    attrs[ATTR_CURRENT_CONSUMPTION] = (
+        #        self.dps(self._config[CONF_CURRENT_CONSUMPTION], self._cid) / 10
+        #    )
+        #if self.has_config(CONF_VOLTAGE):
+        #    attrs[ATTR_VOLTAGE] = self.dps(self._config[CONF_VOLTAGE], self._cid) / 10
         return attrs
 
     async def async_turn_on(self, **kwargs):
         """Turn Tuya switch on."""
-        await self._device.set_dp(True, self._dp_id, self._cid, self._cid)
+        await self._device.set_dp(True, self._dp_id, self._cid)
 
     async def async_turn_off(self, **kwargs):
         """Turn Tuya switch off."""
-        await self._device.set_dp(False, self._dp_id, self._cid, self._cid)
+        await self._device.set_dp(False, self._dp_id, self._cid)
 
     def status_updated(self):
         """Device status was updated."""
