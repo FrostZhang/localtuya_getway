@@ -332,9 +332,13 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
         """Return if device is available or not."""
         return str(self._dp_id) in self._status
 
-    def dps(self, dp_index):
+    def dps(self, dp_index, cid = None):
         """Return cached value for DPS index."""
-        value = self._status.get(str(dp_index))
+        value = None
+        if cid == None
+            value = self._status.get(str(dp_index))
+        else
+            value = self._status.get(cid).get(str(dp_index))
         if value is None:
             self.warning(
                 "Entity %s is requesting unknown DPS index %s",

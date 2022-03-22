@@ -370,7 +370,11 @@ class TuyaProtocol(asyncio.Protocol, ContextualLogger):
     def _setup_dispatcher(self):
         def _status_update(msg):
             decoded_message = self._decode_payload(msg.payload)
-            if "dps" in decoded_message and decoded_message["cid"] == self.id:
+            if "cid" in decoded_message:
+                statu = {}
+                statu[decoded_message["cid"]] = decoded_message["dps"]
+                self.dps_cache.update(statu)
+            elif "dps" in decoded_message:
                 self.dps_cache.update(decoded_message["dps"])
 
             listener = self.listener and self.listener()
