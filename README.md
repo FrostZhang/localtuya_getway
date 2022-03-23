@@ -12,8 +12,6 @@
 host 填网关的地址，device_id和local_key 不解释
 
 entities里面的东西记住在cid填属于此设备cid，不同于device_id。
-### wifi：
-cid填device_id，其他不解释
 
 网关下面的单位暂不知道怎么判定存在，默认都存在避免无法控制。
 
