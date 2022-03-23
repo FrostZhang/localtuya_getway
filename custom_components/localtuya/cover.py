@@ -58,7 +58,7 @@ def flow_schema(dps):
         vol.Optional(CONF_SPAN_TIME, default=DEFAULT_SPAN_TIME): vol.All(
             vol.Coerce(float), vol.Range(min=1.0, max=300.0)
         ),
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Required(CONF_CID_STRING): cv.string,
     }
 
 

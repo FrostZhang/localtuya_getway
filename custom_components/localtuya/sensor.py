@@ -29,7 +29,7 @@ def flow_schema(dps):
         vol.Optional(CONF_SCALING): vol.All(
             vol.Coerce(float), vol.Range(min=-1000000.0, max=1000000.0)
         ),
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Required(CONF_CID_STRING): cv.string,
     }
 
 

@@ -88,7 +88,7 @@ def flow_schema(dps):
         vol.Optional(CONF_FAULT_DP): vol.In(dps),
         vol.Optional(CONF_PAUSED_STATE, default=DEFAULT_PAUSED_STATE): str,
         vol.Optional(CONF_STOP_STATUS, default=DEFAULT_STOP_STATUS): str,
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Required(CONF_CID_STRING): cv.string,
     }
 
 

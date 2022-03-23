@@ -22,7 +22,7 @@ def flow_schema(dps):
     return {
         vol.Required(CONF_OPTIONS): str,
         vol.Optional(CONF_OPTIONS_FRIENDLY): str,
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Required(CONF_CID_STRING): cv.string,
     }
 
 

@@ -26,7 +26,7 @@ def flow_schema(dps):
         vol.Optional(CONF_CURRENT): vol.In(dps),
         vol.Optional(CONF_CURRENT_CONSUMPTION): vol.In(dps),
         vol.Optional(CONF_VOLTAGE): vol.In(dps),
-        vol.Optional(CONF_CID_STRING): cv.string,
+        vol.Required(CONF_CID_STRING): cv.string,
     }
 
 
