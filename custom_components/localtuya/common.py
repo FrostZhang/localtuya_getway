@@ -231,6 +231,7 @@ class TuyaDevice(pytuya.TuyaListener, pytuya.ContextualLogger):
     @callback
     def status_updated(self, status):
         """Device updated status."""
+        # 接收pytuya缓存得信息，分发到所有的设备上，挺费性能的，不知道怎么优化
         self._status.update(status)
         self._dispatch_status()
 
@@ -276,6 +277,8 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
 
         def _update_handler(status):
             """Update entity state when status was updated."""
+            # 缓存pytuya的全部状态，如果是网关，缓存网关下面全部设备的信息。
+            # 很费性能，需要优化
             if status is None:
                 status = {}
             if self._status != status:

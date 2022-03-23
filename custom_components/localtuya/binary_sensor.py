@@ -59,15 +59,17 @@ class LocaltuyaBinarySensor(LocalTuyaEntity, BinarySensorEntity):
 
     def status_updated(self):
         """Device status was updated."""
-        state = str(self.dps(self._dp_id)).lower()
-        if state == self._config[CONF_STATE_ON].lower():
-            self._is_on = True
-        elif state == self._config[CONF_STATE_OFF].lower():
-            self._is_on = False
-        else:
-            self.warning(
-                "State for entity %s did not match state patterns", self.entity_id
-            )
+        dp = self.dps(self._dp_id, self._cid)
+        if dp != None
+            state = str(dp).lower()
+            if state == self._config[CONF_STATE_ON].lower():
+                self._is_on = True
+            elif state == self._config[CONF_STATE_OFF].lower():
+                self._is_on = False
+            else:
+                self.warning(
+                    "State for entity %s did not match state patterns", self.entity_id
+                )
 
 
 async_setup_entry = partial(

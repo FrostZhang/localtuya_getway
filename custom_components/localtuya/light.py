@@ -405,7 +405,7 @@ class LocaltuyaLight(LocalTuyaEntity, LightEntity):
 
     def status_updated(self):
         """Device status was updated."""
-        self._state = self.dps(self._dp_id)
+        self._state = self.dps(self._dp_id, self._cid)
         supported = self.supported_features
         self._effect = None
         if supported & SUPPORT_BRIGHTNESS and self.has_config(CONF_BRIGHTNESS):

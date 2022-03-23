@@ -81,7 +81,7 @@ class LocaltuyaNumber(LocalTuyaEntity, NumberEntity):
 
     def status_updated(self):
         """Device status was updated."""
-        state = self.dps(self._dp_id)
+        state = self.dps(self._dp_id, self._cid)
         self._state = state
 
 
