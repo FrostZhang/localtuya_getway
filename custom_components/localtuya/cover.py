@@ -3,6 +3,7 @@ import asyncio
 import logging
 import time
 from functools import partial
+import homeassistant.helpers.config_validation as cv
 
 import voluptuous as vol
 from homeassistant.components.cover import (
@@ -57,7 +58,7 @@ def flow_schema(dps):
         vol.Optional(CONF_SPAN_TIME, default=DEFAULT_SPAN_TIME): vol.All(
             vol.Coerce(float), vol.Range(min=1.0, max=300.0)
         ),
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 

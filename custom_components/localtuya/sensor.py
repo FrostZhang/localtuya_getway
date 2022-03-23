@@ -3,6 +3,7 @@ import logging
 from functools import partial
 
 import voluptuous as vol
+import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import DEVICE_CLASSES, DOMAIN
 from homeassistant.const import (
     CONF_DEVICE_CLASS,
@@ -28,7 +29,7 @@ def flow_schema(dps):
         vol.Optional(CONF_SCALING): vol.All(
             vol.Coerce(float), vol.Range(min=-1000000.0, max=1000000.0)
         ),
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 

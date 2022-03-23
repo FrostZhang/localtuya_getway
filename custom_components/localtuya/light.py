@@ -2,8 +2,9 @@
 import logging
 import textwrap
 from functools import partial
-
 import homeassistant.util.color as color_util
+import homeassistant.helpers.config_validation as cv
+
 import voluptuous as vol
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
@@ -130,7 +131,7 @@ def flow_schema(dps):
         vol.Optional(
             CONF_MUSIC_MODE, default=False, description={"suggested_value": False}
         ): bool,
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 

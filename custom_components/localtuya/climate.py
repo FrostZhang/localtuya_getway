@@ -2,6 +2,7 @@
 import asyncio
 import logging
 from functools import partial
+import homeassistant.helpers.config_validation as cv
 
 import voluptuous as vol
 from homeassistant.components.climate import (
@@ -137,7 +138,7 @@ def flow_schema(dps):
             [PRECISION_WHOLE, PRECISION_HALVES, PRECISION_TENTHS]
         ),
         vol.Optional(CONF_HEURISTIC_ACTION): bool,
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 

@@ -3,6 +3,7 @@ import logging
 from functools import partial
 
 import voluptuous as vol
+import homeassistant.helpers.config_validation as cv
 from homeassistant.components.vacuum import (
     DOMAIN,
     STATE_CLEANING,
@@ -87,7 +88,7 @@ def flow_schema(dps):
         vol.Optional(CONF_FAULT_DP): vol.In(dps),
         vol.Optional(CONF_PAUSED_STATE, default=DEFAULT_PAUSED_STATE): str,
         vol.Optional(CONF_STOP_STATUS, default=DEFAULT_STOP_STATUS): str,
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 

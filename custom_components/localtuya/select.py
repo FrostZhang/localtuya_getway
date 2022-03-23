@@ -5,6 +5,7 @@ from functools import partial
 import voluptuous as vol
 from homeassistant.components.select import DOMAIN, SelectEntity
 from homeassistant.const import CONF_DEVICE_CLASS, STATE_UNKNOWN
+import homeassistant.helpers.config_validation as cv
 
 from .common import LocalTuyaEntity, async_setup_entry
 from .const import (
@@ -21,7 +22,7 @@ def flow_schema(dps):
     return {
         vol.Required(CONF_OPTIONS): str,
         vol.Optional(CONF_OPTIONS_FRIENDLY): str,
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 

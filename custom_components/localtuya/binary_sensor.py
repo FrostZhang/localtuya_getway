@@ -16,6 +16,8 @@ from .const import (
     CONF_CID_STRING,
 )
 
+import homeassistant.helpers.config_validation as cv
+
 _LOGGER = logging.getLogger(__name__)
 
 CONF_STATE_ON = "state_on"
@@ -28,7 +30,7 @@ def flow_schema(dps):
         vol.Required(CONF_STATE_ON, default="True"): str,
         vol.Required(CONF_STATE_OFF, default="False"): str,
         vol.Optional(CONF_DEVICE_CLASS): DEVICE_CLASSES_SCHEMA,
-        vol.Optional(CONF_CID_STRING): str,
+        vol.Optional(CONF_CID_STRING): cv.string,
     }
 
 
