@@ -213,7 +213,7 @@ class LocaltuyaFan(LocalTuyaEntity, FanEntity):
 
     def status_updated(self):
         """Get state of Tuya fan."""
-        self._is_on = self.dps(self._dp_id, self._cid)
+        self._is_on = self.dps(self._dp_id)
 
         current_speed = self.dps_conf(CONF_FAN_SPEED_CONTROL)
         if self._use_ordered_list:

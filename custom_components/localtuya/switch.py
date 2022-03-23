@@ -55,13 +55,13 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
         """Return device state attributes."""
         attrs = {}
         if self.has_config(CONF_CURRENT):
-           attrs[ATTR_CURRENT] = self.dps(self._config[CONF_CURRENT], self._cid)
+           attrs[ATTR_CURRENT] = self.dps(self._config[CONF_CURRENT])
         if self.has_config(CONF_CURRENT_CONSUMPTION):
-            res = self.dps(self._config[CONF_CURRENT_CONSUMPTION], self._cid)
+            res = self.dps(self._config[CONF_CURRENT_CONSUMPTION])
             if res != None:
                 attrs[ATTR_CURRENT_CONSUMPTION] = res / 10
         if self.has_config(CONF_VOLTAGE):
-            res = self.dps(self._config[CONF_VOLTAGE], self._cid) / 10
+            res = self.dps(self._config[CONF_VOLTAGE]) / 10
             if res != None:
                 attrs[ATTR_VOLTAGE] = res / 10
         attrs[CONF_CID_STRING] = self._cid
@@ -77,7 +77,7 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
 
     def status_updated(self):
         """Device status was updated."""
-        self._state = self.dps(self._dp_id,self._cid)
+        self._state = self.dps(self._dp_id)
 
 
 async_setup_entry = partial(async_setup_entry, DOMAIN, LocaltuyaSwitch, flow_schema)

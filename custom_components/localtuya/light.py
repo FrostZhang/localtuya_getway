@@ -397,7 +397,7 @@ class LocaltuyaLight(LocalTuyaEntity, LightEntity):
             states[self._config.get(CONF_COLOR_MODE)] = MODE_WHITE
             states[self._config.get(CONF_BRIGHTNESS)] = brightness
             states[self._config.get(CONF_COLOR_TEMP)] = color_temp
-        await self._device.set_dps(states, self._cid)
+        await self._device.set_dps(states)
 
     async def async_turn_off(self, **kwargs):
         """Turn Tuya light off."""
@@ -405,7 +405,7 @@ class LocaltuyaLight(LocalTuyaEntity, LightEntity):
 
     def status_updated(self):
         """Device status was updated."""
-        self._state = self.dps(self._dp_id, self._cid)
+        self._state = self.dps(self._dp_id)
         supported = self.supported_features
         self._effect = None
         if supported & SUPPORT_BRIGHTNESS and self.has_config(CONF_BRIGHTNESS):

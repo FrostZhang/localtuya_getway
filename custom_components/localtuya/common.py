@@ -277,11 +277,17 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
 
         def _update_handler(status):
             """Update entity state when status was updated."""
-            # 缓存pytuya的全部状态，如果是网关，缓存网关下面全部设备的信息。
-            # 很费性能，需要优化
+            # pytuya包含网关下面全部设备状态，挑出符合自己的
             if status is None:
                 status = {}
-            if self._status != status:
+            if self._cid !=None:
+                if self._cid in status:
+                    mystatus = status[CONF_CID_STRING]
+                    if self._status != mystatus:
+                        self._status = mystatus.copy()
+                        self.status_updated()
+                        self.schedule_update_ha_state()
+            elif self._status != status:
                 self._status = status.copy()
                 if status:
                     self.status_updated()
@@ -340,21 +346,15 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
         else:
             return str(self._dp_id) in self._status
 
-    def dps(self, dp_index, cid = None):
+    def dps(self, dp_index):
         """Return cached value for DPS index."""
-        value = None
-        if cid == None:
-            value = self._status.get(str(dp_index))
-            if value is None:
-                self.warning(
-                    "Entity %s is requesting unknown DPS index %s",
-                    self.entity_id,
-                    dp_index,
-                )
-        elif cid in self._status:
-            value = self._status.get(cid).get(str(dp_index))
-            # 不想报错的原因是网关收到一条信息，所有设备都要在这儿处理。
-            # 很显然只有一个设备有值，其余全得报错。
+        value = self._status.get(str(dp_index))
+        if value is None:
+            self.warning(
+                "Entity %s is requesting unknown DPS index %s",
+                self.entity_id,
+                dp_index,
+        )
         return value
 
     def dps_conf(self, conf_item):
