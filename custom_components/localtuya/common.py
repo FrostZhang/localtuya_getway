@@ -282,7 +282,7 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
                 status = {}
             if self._cid !=None:
                 if self._cid in status:
-                    mystatus = status[CONF_CID_STRING]
+                    mystatus = status[self._cid]
                     if self._status != mystatus:
                         self._status = mystatus.copy()
                         self.status_updated()
@@ -341,7 +341,7 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
         """Return if device is available or not."""
         if self._cid != None:
             #return str(self._cid) in self._status
-            #Todo 网关下面的单位暂不知道怎么判定存在，默认都存在以免无法控制。
+            #Todo 网关下面的单位暂不知道怎么判定存在，默认都存在避免无法控制。
             return True
         else:
             return str(self._dp_id) in self._status
