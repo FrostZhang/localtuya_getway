@@ -1,7 +1,7 @@
 # localtuya_getway
 
 ```diff
-我只有一堆tuya的开关，所以别的设备可能会报错！！！！！！！！
+- 我只有一堆tuya的开关，所以别的设备可能会报错！！！！！！！！
 ```
 
 原版localtuya仅支持wifi连接的tuya设备。我在 https://github.com/rospogrigio/localtuya 的基础上修改适配网关
