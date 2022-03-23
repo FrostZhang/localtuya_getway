@@ -61,7 +61,7 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
             if res != None:
                 attrs[ATTR_CURRENT_CONSUMPTION] = res / 10
         if self.has_config(CONF_VOLTAGE):
-            res = self.dps(self._config[CONF_VOLTAGE]) / 10
+            res = self.dps(self._config[CONF_VOLTAGE])
             if res != None:
                 attrs[ATTR_VOLTAGE] = res / 10
         attrs[CONF_CID_STRING] = self._cid
