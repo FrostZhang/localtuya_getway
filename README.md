@@ -1,7 +1,7 @@
 # localtuya_getway
 
 ```diff
-- 我只有一堆tuya的开关，所以别的设备可能会报错！！！！！！！！
+- 我只有一堆tuya的开关和一个可调亮度的灯（不能变色），所以别的设备可能会报错！！！！！！！！
 ```
 
 原版localtuya仅支持wifi连接的tuya设备。我在 https://github.com/rospogrigio/localtuya 的基础上修改适配网关
@@ -30,14 +30,13 @@ cid填device_id，其他不解释
         friendly_name: tuyaSW1
         cid: 11111111111111
         id: 1
-        current: 18 # Optional
-        current_consumption: 19 # Optional
-        voltage: 20 # Optional
       - platform: switch
         friendly_name: tuyaSW2
         cid: 22222222222222
         id: 1
-        current: 18 # Optional
-        current_consumption: 19 # Optional
-        voltage: 20 # Optional
+      - platform: light
+        friendly_name: tuyaLT1
+        cid: 33333333333333333
+        id: 1
+        brightness: 3
 ```
