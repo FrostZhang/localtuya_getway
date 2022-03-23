@@ -78,7 +78,9 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
 
     def status_updated(self):
         """Device status was updated."""
-        self._state = self.dps(self._dp_id)
+        state = self.dps(self._dp_id)
+        if state != None:
+            self._state = state
 
 
 async_setup_entry = partial(async_setup_entry, DOMAIN, LocaltuyaSwitch, flow_schema)

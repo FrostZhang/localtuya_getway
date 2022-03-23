@@ -97,6 +97,8 @@ SCENE_LIST_RGB_1000 = {
 
 def map_range(value, from_lower, from_upper, to_lower, to_upper):
     """Map a value in one range to another."""
+    if value == None:
+        return None
     mapped = (value - from_lower) * (to_upper - to_lower) / (
         from_upper - from_lower
     ) + to_lower
@@ -398,7 +400,7 @@ class LocaltuyaLight(LocalTuyaEntity, LightEntity):
             states[self._config.get(CONF_COLOR_MODE)] = MODE_WHITE
             states[self._config.get(CONF_BRIGHTNESS)] = brightness
             states[self._config.get(CONF_COLOR_TEMP)] = color_temp
-        await self._device.set_dps(states)
+        await self._device.set_dps(states, self._cid)
 
     async def async_turn_off(self, **kwargs):
         """Turn Tuya light off."""
