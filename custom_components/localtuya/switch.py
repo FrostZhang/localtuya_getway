@@ -54,14 +54,17 @@ class LocaltuyaSwitch(LocalTuyaEntity, SwitchEntity):
     def extra_state_attributes(self):
         """Return device state attributes."""
         attrs = {}
-        #if self.has_config(CONF_CURRENT):
-        #    attrs[ATTR_CURRENT] = self.dps(self._config[CONF_CURRENT], self._cid)
-        #if self.has_config(CONF_CURRENT_CONSUMPTION):
-        #    attrs[ATTR_CURRENT_CONSUMPTION] = (
-        #        self.dps(self._config[CONF_CURRENT_CONSUMPTION], self._cid) / 10
-        #    )
-        #if self.has_config(CONF_VOLTAGE):
-        #    attrs[ATTR_VOLTAGE] = self.dps(self._config[CONF_VOLTAGE], self._cid) / 10
+        if self.has_config(CONF_CURRENT):
+           attrs[ATTR_CURRENT] = self.dps(self._config[CONF_CURRENT], self._cid)
+        if self.has_config(CONF_CURRENT_CONSUMPTION):
+            res = self.dps(self._config[CONF_CURRENT_CONSUMPTION], self._cid)
+            if res != None:
+                attrs[ATTR_CURRENT_CONSUMPTION] = res / 10
+        if self.has_config(CONF_VOLTAGE):
+            res = self.dps(self._config[CONF_VOLTAGE], self._cid) / 10
+            if res != None:
+                attrs[ATTR_VOLTAGE] = res / 10
+        attrs[CONF_CID_STRING] = self._cid
         return attrs
 
     async def async_turn_on(self, **kwargs):

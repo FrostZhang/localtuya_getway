@@ -220,7 +220,7 @@ class TuyaDevice(pytuya.TuyaListener, pytuya.ContextualLogger):
         """Change value of a DPs of the Tuya device."""
         if self._interface is not None:
             try:
-                await self._interface.set_dps(states,cid)
+                await self._interface.set_dps(states, cid)
             except Exception:  # pylint: disable=broad-except
                 self.exception("Failed to set DPs %r", states)
         else:
@@ -332,7 +332,7 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
         """Return if device is available or not."""
         if self._cid != None:
             #return str(self._cid) in self._status
-            #Todo 网关下面的单位暂不知道怎么判定存在
+            #Todo 网关下面的单位暂不知道怎么判定存在，默认都存在以免无法控制。
             return True
         else:
             return str(self._dp_id) in self._status
@@ -350,7 +350,8 @@ class LocalTuyaEntity(RestoreEntity, pytuya.ContextualLogger):
                 )
         elif cid in self._status:
             value = self._status.get(cid).get(str(dp_index))
-
+            # 不想报错的原因是网关收到一条信息，所有设备都要在这儿处理。
+            # 很显然只有一个设备有值，其余全得报错。
         return value
 
     def dps_conf(self, conf_item):
